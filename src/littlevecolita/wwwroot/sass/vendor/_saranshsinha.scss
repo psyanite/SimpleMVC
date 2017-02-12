@@ -1,0 +1,79 @@
+/*
+Made by @screenshake
+linkedin.com/in/saranshsinha
+*/
+
+@function multiple-box-shadow ($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+@keyframes animStar {
+  from {transform: translateY(0px);}
+  to {transform: translateY(-2000px);}
+}
+
+$shadows-small:  multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big:    multiple-box-shadow(100);
+   
+#stars-sm {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 500s linear infinite;
+  opacity: 0.5;
+
+    &:after {
+        content: " ";
+        position: absolute;
+        top: 200px;
+        width: 1px;
+        height: 1px;
+        background: transparent;
+        box-shadow: $shadows-small;
+    }
+}    
+    
+#stars-md {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 1000s linear infinite;
+  opacity: 0.5;
+    
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 200px;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+    
+#stars-lg {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation: animStar 15000s linear infinite;
+  opacity: 0.5;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 200px;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+    

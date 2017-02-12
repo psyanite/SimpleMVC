@@ -1,0 +1,49 @@
+$font-serif: 'Playfair Display', serif;
+$font-sans: 'Roboto Condensed', sans-serif;
+
+$color-red: #ff4136;
+$color-fuschia: #e000ff;
+$color-navy: #1800ff;
+$color-marine: #231988;
+
+
+
+$text-color: rgb(34, 34, 34) !default;
+$brand-color: rgb(229, 0, 80) !default;
+$light-grey: rgb(237, 237, 237) !default;
+$mid-grey: rgb(153, 153, 153) !default;
+$dark-grey: rgb(68, 68, 68) !default;
+
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+$breakpoints: (
+  'xs': 320px,
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1280px,
+  'xl': 1366px,
+  'xxl': 1920px,
+) !default;
+
+
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;
