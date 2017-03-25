@@ -43,9 +43,7 @@ paths.concatCssDest = paths.webroot + "css/site.min.css";
 //  Tasks
 // ===================================================
 
-gulp.task("default", ["clean.js", "clean:styles",
-                      "min:js", "compile:styles",
-                      "watch:js", "watch:styles"]);
+gulp.task("default", ["clean", "compile", "min", "watch"]);
 
 
 
@@ -61,7 +59,8 @@ gulp.task("clean:styles", function (cb) {
 
 
 
-gulp.task("min", ["min:js", "min:styles"]);
+//gulp.task("min", ["min:js", "min:styles"]);
+gulp.task("min", ["min:styles"]);
 
 gulp.task("min:js", function () {
     return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
@@ -79,6 +78,8 @@ gulp.task("min:styles", function () {
 
 
 
+gulp.task("compile", ["compile:styles"]);
+
 gulp.task('compile:styles', function () {
     gulp.src([paths.sassPath + '/*.scss'])
       .pipe(plumber())
@@ -95,6 +96,8 @@ gulp.task('compile:styles', function () {
 });
 
 
+
+gulp.task("watch", ["watch:js", "watch:styles"]);
 
 gulp.task('watch:js', function () {
     gulp.watch(paths.js, ['min:js']);

@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/src/littlevecolita/.sass-cache
+/src/littlevecolita/node_modules
+/src/littlevecolita/project.lock.json
+/src/littlevecolita/littlevecolita.xproj.user

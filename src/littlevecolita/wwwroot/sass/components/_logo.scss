@@ -1,0 +1,77 @@
+
+.logo {
+  z-index: 0;
+  position: fixed;
+  top: 16px;
+  left: 5%;
+  width: 32vw;
+  @include transition(all 900ms cubic-bezier(0.165, 0.84, 0.44, 1));
+  @include transform(translateY(-50%));
+
+  @include respond-to('xxl') {
+    top: 208px;
+  }
+
+  &.top {
+    z-index: 500;
+  }
+
+  text {
+    font-family: "Playfair Display", serif;
+  
+    &.md {
+      visibility: visible;
+      font-size: 124px;
+
+      @include respond-to('lg') {
+        visibility: hidden;
+      }
+      
+      &.fuschia {
+        fill: url(#text-gradient-fuschia-md);
+      }
+
+      &.aubergine {
+        fill: url(#text-gradient-aubergine-md);
+      }
+    }
+
+    &.lg {
+      visibility: hidden;
+      font-size: 162px;
+
+      @include respond-to('lg') {
+        visibility: visible;
+      }
+
+      @include respond-to('xxl') {
+        visibility: hidden;
+      }
+      
+      &.fuschia {
+        fill: url(#text-gradient-fuschia-lg);
+      }
+
+      &.aubergine {
+        fill: url(#text-gradient-aubergine-lg);
+      }
+    }
+
+    &.xxl {
+      visibility: hidden;
+      font-size: 200px;
+
+      @include respond-to('xxl') {
+        visibility: visible;
+      }
+      
+      &.fuschia {
+        fill: url(#text-gradient-fuschia-xxl);
+      }
+
+      &.aubergine {
+        fill: url(#text-gradient-aubergine-xxl);
+      }
+    }
+  }
+}

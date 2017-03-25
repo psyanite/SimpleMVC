@@ -1,0 +1,132 @@
+
+.column {
+  display: inline-block;
+  width: 32%;
+}
+
+.set {
+  margin-bottom: 90px;
+
+  @include respond-to('lg') {
+    margin-bottom: 100px;
+  }
+
+  @include respond-to('xl') {
+    margin-bottom: 110px;
+  }
+
+}
+
+.skills {
+  top: 300px;
+  background-color: white;
+  background-size: 100%;
+  @include background-image(linear-gradient(190deg, #ffffff 70%, #f7f7f7 70%, #d2d2d2));
+  
+  @include respond-to('lg') {
+    top: 400px;
+  }
+  
+  .content {
+    padding-left: 335px;
+  
+    @include respond-to('lg') {
+      padding-left: 434px;
+    }
+  
+    @include respond-to('xxl') {
+      padding-left: 572px;
+    }
+  }
+
+  .section {
+    margin-bottom: 5em;
+  }
+
+  h1 {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: #231988;
+    margin: 0 0 0.67em 0;
+
+    @include respond-to('lg') {
+      font-size: 2.0em;
+    }
+
+    @include respond-to('xl') {
+      font-size: 2.4em;
+    }
+  }
+
+  .skill {
+    margin-bottom: 15px;
+  }
+
+  .name {
+    display: inline-block;
+    width: 99px;
+    vertical-align: top;
+    font-size: 1.1em;
+
+    @include respond-to('lg') {
+      font-size: 1.4em;
+      width: 125px;
+    }
+
+    @include respond-to('xxl') {
+      font-size: 1.7em;
+      width: 150px;
+    }
+  }
+
+  .bar {
+    display: inline-block;
+    position: relative;
+    width: 72px;
+    height: 28px;
+    /*background-size: 100%;*/
+    @include background-image(linear-gradient(to right, #c1306d, #ff4136));
+
+    @include respond-to('lg') {
+      height: 32px;
+    }
+
+    @include respond-to('xxl') {
+      height: 36px;
+    }
+
+    span {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #ffffff;
+      opacity: 0.8;
+
+      &.points-1 {
+        width: 90%;
+      }
+      &.points-2 {
+        width: 80%;
+      }
+      &.points-3 {
+        width: 70%;
+      }
+      &.points-4 {
+        width: 60%;
+      }
+      &.points-5 {
+        width: 50%;
+      }
+      &.points-6 {
+        width: 40%;
+      }
+      &.points-7 {
+        width: 30%;
+      }
+      &.points-8 {
+        width: 20%;
+      }
+    }
+  }
+}
