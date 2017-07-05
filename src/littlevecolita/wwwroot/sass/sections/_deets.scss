@@ -1,0 +1,116 @@
+section#deets {
+
+  .head {
+    position: absolute;
+    z-index: -1;
+    left: 630px;
+    bottom: 200px;
+
+    .face {
+      width: 800px;
+    }
+
+    .eye {
+      position: absolute;
+      overflow: hidden;
+      border-radius: 50%;
+      width: 157px;
+      height: 157px;
+    }
+
+    .pupil {
+      position: relative;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+
+      .glare {
+      width: 100px;
+        height: 100px;
+      }
+    }
+
+    #eye-left {
+      left: 170px;
+      top: 285px;
+    }
+
+    #eye-right {
+      left: 473px;
+      top: 285px;
+    }
+  }
+
+  .paws {
+    position: absolute;
+    width: 450px;
+    left: 806px;
+    bottom: 250px;
+  }
+
+  .footnote {
+    .note {
+      position: absolute;
+      bottom: 50px;
+      left: 5%;
+      color: $color-white;
+
+      .icon {
+        width: 15px;
+        height: 15px;
+        margin-left: 2px;
+        margin-bottom: -2px;
+      }
+
+      &:hover .credits {
+        opacity: 1;
+      }
+
+      .credits {
+        opacity: 0;
+        @include transition(opacity 0.25s ease);
+        span {
+          display: block;
+          a {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .rollies {
+      position: absolute;
+      bottom: 50px;
+      right: 5%;
+    }
+  }
+
+  .galaxy {
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    height: 300px;
+    -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+#eye1 {
+  position: absolute;
+  background: #FFFFFF;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  left: 213px;
+  top: 72px;
+
+}
+
+#pupil1 {
+  position: relative;
+  background: #000000;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}

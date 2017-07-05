@@ -21,10 +21,12 @@
 
 // Sections
 @import
-  'sections/galaxy',
-  'sections/skills',
-  'sections/timeline';
+  'sections/intro',
+  'sections/showcase',
+  'sections/deets';
 
 // Components
 @import
-  'components/logo';
+  'components/logo',
+  'components/galaxy',
+  'components/rollie';

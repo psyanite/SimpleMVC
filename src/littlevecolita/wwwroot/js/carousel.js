@@ -1,12 +1,5 @@
-﻿$('#showcase').owlCarousel({
-    loop: true,
-    nav: true,
-    items: 1
-})
-
-$(document).ready(function () {
-    $('#showcase').owlCarousel();
-    $('#meowCase').meowCarousel();
+﻿$(document).ready(function () {
+    $('div#showcase').meowCarousel();
 });
 
 $.fn.meowCarousel = function () {
@@ -49,7 +42,7 @@ $.fn.meowCarousel = function () {
     function resize() {
         var windowWidth = $(window).width();
         $('.owl-item').width(windowWidth);
-        $('.owl-item .item img').width(windowWidth * 0.9 - 5 - $('.owl-item .item .description').outerWidth());
+        $('.owl-item .item .showcase').width(windowWidth * 0.9 - 5 - $('.owl-item .item .description').outerWidth());
         $('.owl-dots-wrap').width(windowWidth);
     }
 

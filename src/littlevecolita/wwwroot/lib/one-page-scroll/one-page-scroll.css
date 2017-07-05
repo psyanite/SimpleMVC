@@ -59,15 +59,6 @@ body, .onepage-wrapper, html {
   -moz-border-radius: 10px;
 }
 
-.onepage-pagination li a.active:before{
-  width: 10px;
-  height: 10px;
-  background: none;
-  border: 1px solid black;
-  margin-top: -4px;
-  left: 8px;
-}
-
 .disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
   overflow: auto;
 }

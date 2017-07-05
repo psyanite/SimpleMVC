@@ -1,19 +1,18 @@
-.timeline {
+section#showcase {
     margin: 27px 0px;
 
     @include respond-to('lg') {
-        margin: 41px 0px;
+        margin: 77px 0px;
     }
 
-    @include respond-to('xxl') {
-        margin: 54px 0px;
+    @include respond-to('xl') {
+        margin: 77px 0px;
     }
 
     .caroumeow {
         .owl-dots-wrap {
             display: inline-block;
             position: relative;
-            top: -64px;
             text-align: center;
         }
 
@@ -63,17 +62,37 @@
 
             .description {
                 display: inline-block;
-                width: 572px;
+                width: 543px;
                 vertical-align: top;
-                margin-top: 372px;
+                margin-top: 315px;
                 padding-right: 50px;
                 /*padding-right: 76px;*/
             }
 
-            img {
+            .showcase {
                 display: inline-block;
                 width: auto;
             }
         }
     }
+}
+
+
+
+.content1 {
+  padding: 151px 0 0 572px;
+
+  .supermeow {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;            
+    @include background-image(linear-gradient(to bottom right, rgba(229, 0, 80, 0.3), rgba(24, 0, 255, 0.5)));
+    box-shadow: 4px 4px 1px rgba(136, 136, 136, 0.4);
+    transition: width 0.25s;
+
+    &:hover {
+      width: 200px;
+    }
+  }
 }

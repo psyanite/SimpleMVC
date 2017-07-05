@@ -1,41 +1,59 @@
-﻿"use strict";
+﻿
+"use strict";
 
-var cleancss = require("gulp-clean-css"),
-    compass = require("gulp-compass"),
-    concat = require("gulp-concat"),
-    cssmin = require("gulp-cssmin"),
-    gulp = require("gulp"),
-    path = require("path"),
-    plumber = require("gulp-plumber"),
-    rename = require('gulp-rename'),
-    rimraf = require("rimraf"),
+var cleancss   = require("gulp-clean-css"),
+    compass    = require("gulp-compass"),
+    concat     = require("gulp-concat"),
+    del        = require("del"),
+    filter     = require("gulp-filter"),
+    gulp       = require("gulp"),
+    path       = require("path"),
+    rename     = require('gulp-rename'),
+    sequence   = require('gulp-sequence'),
     sourcemaps = require("gulp-sourcemaps"),
-    uglify = require("gulp-uglify");
-
-var paths = {
-    webroot: "./wwwroot/"
-};
+    svgSprite  = require("gulp-svg-sprites"),
+    uglify     = require("gulp-uglify"),
+    vinylPaths = require("vinyl-paths");
 
 
 
 // ===================================================
 //  Paths
 // ===================================================
+var rootPath = "./wwwroot/";
+var basePaths = {
+    config: rootPath + "config/",
+    css: rootPath + "css/",
+    js: rootPath + "js/",
+    lib: rootPath + "lib/",
+    sass: rootPath + "sass/",
+    sprite: rootPath + "sprite/"
+};
 
-paths.config = paths.webroot + "config";
-
-paths.cssPath = paths.webroot + "css";
-
-paths.sassPath = paths.webroot + "sass";
-paths.mainSassFile = paths.sassPath + "/*.scss";
-paths.otherSassFiles = paths.sassPath + "/**/*.scss";
-
-paths.js = paths.webroot + "js/**/*.js";
-paths.minJs = paths.webroot + "js/**/*.min.js";
-paths.css = paths.webroot + "css/**/*.css";
-paths.minCss = paths.webroot + "css/**/*.min.css";
-paths.concatJsDest = paths.webroot + "js/site.min.js";
-paths.concatCssDest = paths.webroot + "css/site.min.css";
+var paths = {
+    css: {
+        files: basePaths.css + "custom.css",
+        libFiles: basePaths.lib + "**/*.css",
+        destFile: "main.css",
+        destMinFile: "main.min.css"
+    },
+    js: {
+        files: basePaths.js + "*.js",
+        libFiles: basePaths.lib + "**/*.js",
+        destFile: basePaths.js + "main.min.js"
+    },
+    sass: {
+        main: basePaths.sass + "/*.scss",
+        partials: basePaths.sass + "**/*.scss",
+        destFile: "custom.css",
+        destMinFile: "custom.min.css"
+    },
+    sprite: {
+        svgs: basePaths.sprite + "svgs/*.svg",
+        scss: basePaths.sass + "base",
+        svg: basePaths.sprite + "sprite.svg"
+    }
+};
 
 
 
@@ -43,66 +61,85 @@ paths.concatCssDest = paths.webroot + "css/site.min.css";
 //  Tasks
 // ===================================================
 
-gulp.task("default", ["clean", "compile", "min", "watch"]);
+gulp.task("build", sequence("clean", "compile", "min", "watch"));
 
-
-
+/* Clean */
 gulp.task("clean", ["clean:js", "clean:styles"]);
 
-gulp.task("clean:js", function (cb) {
-    rimraf(paths.concatJsDest, cb);
+gulp.task("clean:js", function () {
+    return del([paths.js.destFile]);
 });
 
-gulp.task("clean:styles", function (cb) {
-    rimraf(paths.concatCssDest, cb);
+gulp.task("clean:styles", function () {
+    return del([
+        paths.sass.destFile,
+        paths.sass.destMinFile,
+        paths.css.destFile,
+        paths.css.destMinFile,
+    ]);
 });
 
 
 
-//gulp.task("min", ["min:js", "min:styles"]);
-gulp.task("min", ["min:styles"]);
+/* Minify */
+gulp.task("min", ["min:js", "min:styles"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-        .pipe(concat(paths.concatJsDest))
+    return gulp.src([paths.js.files, paths.js.libFiles])
+        .pipe(concat(paths.js.destFile))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
 
 gulp.task("min:styles", function () {
-    return gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
+    return gulp.src([paths.css.files, paths.css.libFiles])
+        .pipe(concat(paths.css.destFile))
+        .pipe(cleancss())
         .pipe(gulp.dest("."));
 });
 
 
 
+/* Compile */
 gulp.task("compile", ["compile:styles"]);
 
 gulp.task('compile:styles', function () {
-    gulp.src([paths.sassPath + '/*.scss'])
-      .pipe(plumber())
+    return gulp.src([basePaths.sass + '/*.scss'])
       .pipe(compass({
-          config_file: paths.config + '/compass-config.rb',
-          css: paths.cssPath,
-          sass: paths.sassPath
+          config_file: basePaths.config + '/compass-config.rb',
+          css: basePaths.css,
+          sass: basePaths.sass
       }))
-      .pipe(sourcemaps.init())
+      .pipe(vinylPaths(del))
+      .pipe(rename(paths.sass.destFile))
+      .pipe(gulp.dest(basePaths.css))
       .pipe(cleancss())
-      .pipe(sourcemaps.write())
-      .pipe(rename("main.min.css"))
-      .pipe(gulp.dest(paths.cssPath));
+      .pipe(gulp.dest(basePaths.css))
+      .pipe(rename(paths.sass.destMinFile))
+      .pipe(gulp.dest(basePaths.css));
 });
 
 
 
+/* Watch */
 gulp.task("watch", ["watch:js", "watch:styles"]);
 
 gulp.task('watch:js', function () {
-    gulp.watch(paths.js, ['min:js']);
+    return gulp.watch(paths.js.files, ['min:js']);
 });
 
 gulp.task('watch:styles', function () {
-    gulp.watch([paths.mainSassFile, paths.otherSassFiles], ['compile:styles']);
+    return gulp.watch([paths.sass.main, paths.sass.partials], ['compile:styles']);
+});
+
+
+
+/* SVG Sprite */
+gulp.task('sprite', function () {
+    return gulp.src(paths.sprite.svgs, { base: '.' })
+        .pipe(svgSprite({
+            templates: { scss: true },
+            mode: "symbols"
+        }))
+        .pipe(gulp.dest(basePaths.sprite))
 });

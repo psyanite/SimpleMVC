@@ -1,15 +1,14 @@
 
 .logo {
-  z-index: 0;
   position: fixed;
-  top: 16px;
   left: 5%;
-  width: 32vw;
+  width: 320px;
+  height: 300px;
   @include transition(all 900ms cubic-bezier(0.165, 0.84, 0.44, 1));
   @include transform(translateY(-50%));
 
-  @include respond-to('xxl') {
-    top: 208px;
+  @include respond-to('lg') {
+    top: 157px;
   }
 
   &.top {

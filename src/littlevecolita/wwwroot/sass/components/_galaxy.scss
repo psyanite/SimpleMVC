@@ -1,0 +1,5 @@
+
+.galaxy {
+  width: 100%;
+  @include background-image(linear-gradient(to bottom right, #000f56, #000000));
+}

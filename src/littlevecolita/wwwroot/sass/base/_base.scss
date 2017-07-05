@@ -35,10 +35,21 @@ a {
 
 .onepage-pagination li {
   a:before {
-    background: rgba(160, 37, 128, 0.85);
+    background: $brand-color;
+    opacity: 0.3;
+    width: 5px;
+    height: 5px;
+    margin-top: 0px;
+    left: 10px;
+    border: none;
+    transition: opacity 0.25s ease;
+    @include border-radius(4px);
   }
 
   a.active:before {
-    border: 1px solid rgba(160, 37, 128, 0.85);
+    opacity: 0.8;
   }
 }
+
+
+

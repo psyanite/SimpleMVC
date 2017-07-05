@@ -1,0 +1,59 @@
+/* 3D FLIP BUTTON http://nerval.ch/ */
+a.rollie {
+  display: inline-block;
+  color: $color-white;
+  font-size: 16px;
+  position: relative;
+  margin-left: 20px;
+  width: 210px;
+  height: 54px;
+  line-height: 54px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  @include transform-style(preserve-3d);
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+  .side-a,
+  .side-b {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    padding: 0 20px;
+    @include border-radius(3px);
+    @include backface-visibility(hidden);
+    @include transform-origin(50%);
+    @include transition(all 0.25s ease);
+
+    .icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .side-a {
+    @include background-image(linear-gradient(-145deg, $brand-color, $color-navy));
+    @include transform(rotateX(0deg) translateZ(27px));
+  }
+
+  .side-b {
+    @include background-image(linear-gradient(-45deg, $brand-color, $color-navy));
+    @include transform(rotateX(90deg) translateZ(27px));
+  }
+
+  &:hover {
+    .side-a {
+      @include transform(rotateX(-90deg) translateZ(27px));
+    }
+
+    .side-b {
+      @include transform(rotateX(0deg) translateZ(27px));
+    }
+  }
+}

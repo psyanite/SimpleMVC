@@ -1,4 +1,48 @@
+section#introduction {
+  .galaxy {
+    height: 200px;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+  
+    @include respond-to('lg') {
+        height: 400px;
+    }
 
+  }
+
+  .quote {
+    position: absolute;
+    width: 95%;
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.45em;
+    
+    .icon {
+      width: 25px;
+      height: 42px;
+      margin-right: 10px;
+    }
+  
+    @include respond-to('lg') {
+      width: 95%;
+      padding: 0px 0 77px 434px;
+    }
+  
+    @include respond-to('xxl') {
+      width: 90%;
+    padding: 151px 0 0 572px;
+    }
+
+    @include respond-to('lg') {
+      font-size: 1.75em;
+    }
+
+    @include respond-to('xxl') {
+      font-size: 2em;
+    }
+  }
+
+  
 .column {
   display: inline-block;
   width: 32%;
@@ -129,4 +173,5 @@
       }
     }
   }
+}
 }
