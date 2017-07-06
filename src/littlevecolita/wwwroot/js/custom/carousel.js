@@ -15,7 +15,6 @@ $.fn.meowCarousel = function () {
 
     $('.owl-dot').on('tap click', function (event) {
         var index = $('.owl-dot').index($(this));
-        console.log(index);
         moveStage(index);
     })
 
@@ -47,8 +46,3 @@ $.fn.meowCarousel = function () {
     }
 
 }
-
-
-
-
-

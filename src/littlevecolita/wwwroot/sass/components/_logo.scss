@@ -58,7 +58,7 @@
 
     &.xxl {
       visibility: hidden;
-      font-size: 200px;
+      font-size: 190px;
 
       @include respond-to('xxl') {
         visibility: visible;

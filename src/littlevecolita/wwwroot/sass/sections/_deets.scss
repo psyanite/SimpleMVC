@@ -4,7 +4,7 @@ section#deets {
     position: absolute;
     z-index: -1;
     left: 630px;
-    bottom: 200px;
+    bottom: 150px;
 
     .face {
       width: 800px;
@@ -45,7 +45,7 @@ section#deets {
     position: absolute;
     width: 450px;
     left: 806px;
-    bottom: 250px;
+    bottom: 200px;
   }
 
   .footnote {
@@ -89,7 +89,7 @@ section#deets {
     z-index: -1;
     position: absolute;
     bottom: 0;
-    height: 300px;
+    height: 250px;
     -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
     clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
   }

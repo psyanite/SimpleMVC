@@ -10,7 +10,6 @@ var DrawEye = function (eye, pupil) {
     // Initialise core variables
     var eyeX = $(eye).position().left + $(eye).offsetParent().position().left;
     var eyeY = $(eye).position().top + $(eye).offsetParent().position().top;
-    console.log($(eye).offset());
     var r = $(pupil).width() / 2;
     var center = {
         x: $(eye).width() / 2 - r,
@@ -21,6 +20,8 @@ var DrawEye = function (eye, pupil) {
 
     // Update mouseX and mouseY on mousemove
     $(window).mousemove(function (e) {
+        eyeX = $(eye).position().left + $(eye).offsetParent().position().left;
+        eyeY = $(eye).position().top + $(eye).offsetParent().position().top;
         var d = {
             x: e.pageX - r - eyeX - center.x,
             y: e.pageY - r - eyeY - center.y

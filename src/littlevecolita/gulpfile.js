@@ -32,21 +32,19 @@ var basePaths = {
 
 var paths = {
     css: {
-        files: basePaths.css + "custom.css",
-        libFiles: basePaths.lib + "**/*.css",
-        destFile: "main.css",
-        destMinFile: "main.min.css"
+        destFile: basePaths.css + "main.css",
+        destMinFile: basePaths.css + "main.min.css"
     },
     js: {
-        files: basePaths.js + "*.js",
-        libFiles: basePaths.lib + "**/*.js",
-        destFile: basePaths.js + "main.min.js"
+        customFiles: basePaths.js + "custom/*.js",
+        destFile: basePaths.js + "main.js",
+        destMinFile: basePaths.js + "main.min.js"
     },
     sass: {
         main: basePaths.sass + "/*.scss",
         partials: basePaths.sass + "**/*.scss",
-        destFile: "custom.css",
-        destMinFile: "custom.min.css"
+        destFile: basePaths.css + "custom.css",
+        destMinFile: basePaths.css + "custom.min.css"
     },
     sprite: {
         svgs: basePaths.sprite + "svgs/*.svg",
@@ -61,13 +59,17 @@ var paths = {
 //  Tasks
 // ===================================================
 
-gulp.task("build", sequence("clean", "compile", "min", "watch"));
+gulp.task("boot", sequence("clean", "compile"));
+gulp.task("build", sequence("clean", "compile", "watch"));
 
 /* Clean */
 gulp.task("clean", ["clean:js", "clean:styles"]);
 
 gulp.task("clean:js", function () {
-    return del([paths.js.destFile]);
+    return del([
+        paths.js.destFile,
+        paths.js.destMinFile
+    ]);
 });
 
 gulp.task("clean:styles", function () {
@@ -81,29 +83,10 @@ gulp.task("clean:styles", function () {
 
 
 
-/* Minify */
-gulp.task("min", ["min:js", "min:styles"]);
-
-gulp.task("min:js", function () {
-    return gulp.src([paths.js.files, paths.js.libFiles])
-        .pipe(concat(paths.js.destFile))
-        .pipe(uglify())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min:styles", function () {
-    return gulp.src([paths.css.files, paths.css.libFiles])
-        .pipe(concat(paths.css.destFile))
-        .pipe(cleancss())
-        .pipe(gulp.dest("."));
-});
-
-
-
 /* Compile */
-gulp.task("compile", ["compile:styles"]);
+gulp.task("compile", sequence("compile:sass", "compile:css", "compile:js"));
 
-gulp.task('compile:styles', function () {
+gulp.task('compile:sass', function () {
     return gulp.src([basePaths.sass + '/*.scss'])
       .pipe(compass({
           config_file: basePaths.config + '/compass-config.rb',
@@ -112,11 +95,38 @@ gulp.task('compile:styles', function () {
       }))
       .pipe(vinylPaths(del))
       .pipe(rename(paths.sass.destFile))
-      .pipe(gulp.dest(basePaths.css))
+      .pipe(gulp.dest("."))
       .pipe(cleancss())
-      .pipe(gulp.dest(basePaths.css))
       .pipe(rename(paths.sass.destMinFile))
-      .pipe(gulp.dest(basePaths.css));
+      .pipe(gulp.dest("."));
+});
+
+gulp.task("compile:css", function () {
+    var files = [
+        basePaths.lib + "one-page-scroll/*.css",
+        paths.sass.destFile
+    ];
+    return gulp.src(files)
+        .pipe(concat(paths.css.destFile))
+        .pipe(gulp.dest("."))
+        .pipe(cleancss())
+        .pipe(rename(paths.css.destMinFile))
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("compile:js", function () {
+    var files = [
+        basePaths.lib + "one-page-scroll/*.min.js",
+        basePaths.lib + "owl-carousel/*.min.js",
+        basePaths.lib + "sergep/*.js",
+        paths.js.customFiles
+    ];
+    return gulp.src(files)
+        .pipe(concat(paths.js.destFile))
+        .pipe(gulp.dest("."))
+        .pipe(uglify())
+        .pipe(rename(paths.js.destMinFile))
+        .pipe(gulp.dest("."));
 });
 
 
@@ -129,7 +139,7 @@ gulp.task('watch:js', function () {
 });
 
 gulp.task('watch:styles', function () {
-    return gulp.watch([paths.sass.main, paths.sass.partials], ['compile:styles']);
+    return gulp.watch([paths.sass.main, paths.sass.partials], ['compile:sass']);
 });
 
 
