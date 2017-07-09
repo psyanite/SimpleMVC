@@ -23,7 +23,7 @@ Several tasks have been implemented in 'gulpfile.js' to compile and minify the S
 The Sass files are located in 'wwwroot/sass' structured into five folders, 'abstracts', 'base', 'components', 'sections', and 'vendors' appropriately. So far the CSS changes are for '/Views/Neila/Index.cshtml' which uses the '/Views/Neila/_Layout.cshtml'.
 
 ## Build configurations
-Two separate 'appsettings.json' files are utilized for environment specific logging and database connections. Further launch configurations can be configured on separate profiles in Launch Settings ('launchSettings.json'). Thhe application starts up by running 'Startup.cs' with takes in these files into consideration.
+Two separate 'appsettings.json' files are utilized for environment specific logging and database connections. Further launch configurations can be configured on separate profiles in Launch Settings ('launchSettings.json'). The application starts up by running 'Startup.cs' with takes in these files into consideration.
 
 ## Helpful links
 * [Sass guidelines](https://sass-guidelin.es/)
