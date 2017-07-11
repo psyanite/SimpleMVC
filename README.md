@@ -25,6 +25,9 @@ The Sass files are located in 'wwwroot/sass' structured into five folders, 'abst
 ## Build configurations
 Two separate 'appsettings.json' files are utilized for environment specific logging and database connections. Further launch configurations can be configured on separate profiles in Launch Settings ('launchSettings.json'). The application starts up by running 'Startup.cs' with takes in these files into consideration.
 
+## To do
+* Update svg icon usages as per [this article](https://css-tricks.com/creating-svg-icon-system-react/)
+
 ## Helpful links
 * [Sass guidelines](https://sass-guidelin.es/)
 * [CSS declarations](http://maxdesign.com.au/jobs/sample-format/css-declaration.htm)
